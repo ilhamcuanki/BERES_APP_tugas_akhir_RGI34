@@ -10,7 +10,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !verify_csrf_token()) {
     set_flash('error', 'Permintaan tidak valid. Silakan gunakan formulir resmi.');
-    header('Location: ../auth/register.php');
+    header('Location: ' . BASE_URL . 'auth/register.php');
     exit;
 }
 
@@ -21,7 +21,7 @@ $role   = in_array($_POST['role'], ['client', 'helper']) ? $_POST['role'] : 'cli
 
 if (!$nama || !$email || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($pass) < 6) {
     set_flash('error', 'Data tidak lengkap atau format email/password salah.');
-    header('Location: ../auth/register.php');
+    header('Location: ' . BASE_URL . 'auth/register.php');
     exit;
 }
 
@@ -30,7 +30,7 @@ try {
     $stmt->execute([$email]);
     if ($stmt->fetch()) {
         set_flash('error', 'Email sudah terdaftar. Silakan login atau gunakan email lain.');
-        header('Location: ../auth/register.php');
+        header('Location: ' . BASE_URL . 'auth/register.php');
         exit;
     }
 
@@ -39,11 +39,11 @@ try {
     $stmt->execute([$nama, $email, $hash, $role]);
 
     set_flash('success', 'Registrasi berhasil. Silakan login.');
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_URL . 'auth/login.php');
     exit;
 } catch (PDOException $e) {
     error_log("Register Error: " . $e->getMessage());
     set_flash('error', 'Terjadi kesalahan sistem. Coba beberapa saat lagi.');
-    header('Location: ../auth/register.php');
+    header('Location: ' . BASE_URL . 'auth/register.php');
     exit;
 }

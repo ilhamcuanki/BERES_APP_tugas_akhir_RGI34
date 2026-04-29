@@ -4,6 +4,8 @@
 // Path Root Aplikasi (otomatis menyesuaikan struktur folder)
 define('ROOT_PATH', dirname(__DIR__) . '/');
 
+define('BASE_URL', '/beres_app/'); 
+
 // Path Aset & Upload
 define('ASSETS_PATH', ROOT_PATH . 'assets/');
 define('UPLOAD_PATH', ASSETS_PATH . 'img/');

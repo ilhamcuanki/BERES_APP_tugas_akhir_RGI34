@@ -36,7 +36,7 @@ require_once ROOT_PATH . 'helpers/flash.php';
       <p>Bergabung sebagai pencari jasa atau penyedia keahlian</p>
     </div>
     <?= render_flash() ?>
-    <form action="<?= ROOT_PATH ?>process/register_process.php" method="POST" autocomplete="off">
+    <form action="<?= BASE_URL ?>process/register_process.php" method="POST" autocomplete="off">
       <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
       <div class="form-group">
         <label class="form-label">Nama Lengkap</label>

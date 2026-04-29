@@ -33,11 +33,11 @@ try {
         $_SESSION['user_id'] = $user['id_user'];
         $_SESSION['nama']    = $user['nama'];
         $_SESSION['role']    = $user['role'];
-        
-        $redirect = match($user['role']) {
-            'admin' => ROOT_PATH . 'admin/dashboard.php',
-            'helper' => ROOT_PATH . 'helper/dashboard.php',
-            default => ROOT_PATH . 'client/dashboard.php'
+
+        $redirect = match ($user['role']) {
+            'admin'  => BASE_URL . 'admin/dashboard.php',
+            'helper' => BASE_URL . 'helper/dashboard.php',
+            default  => BASE_URL . 'client/dashboard.php'
         };
         set_flash('success', "Selamat datang, {$user['nama']}!");
         header("Location: $redirect");
