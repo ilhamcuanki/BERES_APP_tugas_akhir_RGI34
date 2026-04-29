@@ -85,3 +85,15 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: v
 
 /* Layout Wrapper */
 .main-wrapper { min-height: calc(100vh - 180px); padding: 2rem 0; }
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex; align-items: center; padding: 0.25rem 0.6rem;
+  border-radius: 6px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+}
+.status-open     { background: #dbeafe; color: #1e40af; }
+.status-taken    { background: #fef3c7; color: #92400e; }
+.status-ongoing  { background: #e0e7ff; color: #3730a3; }
+.status-done     { background: #dcfce7; color: #166534; }
+.status-cancelled{ background: #fee2e2; color: #991b1b; }
+.text-muted { color: var(--text-muted); font-size: 0.9rem; }
