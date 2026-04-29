@@ -50,10 +50,7 @@ if (!$is_logged_in) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
-  <style>
-    /* Inline style hanya untuk layout spesifik halaman, sisanya di style.css */
-    .main-wrapper { min-height: calc(100vh - 180px); padding: 2rem 0; }
-  </style>
+
 </head>
 <body>
   <nav class="navbar">
