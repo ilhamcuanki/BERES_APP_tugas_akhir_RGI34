@@ -1,8 +1,10 @@
 <?php
 // includes/header.php
-// ATURAN PENTING: Gunakan BASE_URL untuk href/action, ROOT_PATH untuk require/include
-require_once ROOT_PATH . 'config/constants.php';
-require_once ROOT_PATH . 'helpers/flash.php';
+// 1. Muat constants.php menggunakan __DIR__ (menghindari error ROOT_PATH belum terdefinisi)
+require_once __DIR__ . '/../config/constants.php';
+
+// 2. Setelah constants.php sukses, ROOT_PATH sudah ada. Muat helper lainnya.
+require_once ROOT_PATH . 'utils/flash.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -50,7 +52,6 @@ if (!$is_logged_in) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
-
 </head>
 <body>
   <nav class="navbar">
@@ -68,7 +69,6 @@ if (!$is_logged_in) {
     </div>
   </nav>
 
-  <!-- Flash Message Area -->
   <div class="container">
     <?= render_flash() ?>
   </div>

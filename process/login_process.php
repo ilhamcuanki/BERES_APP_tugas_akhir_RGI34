@@ -2,9 +2,9 @@
 // process/login_process.php
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/database.php';
-require_once ROOT_PATH . 'helpers/csrf.php';
-require_once ROOT_PATH . 'helpers/sanitize.php';
-require_once ROOT_PATH . 'helpers/flash.php';
+require_once ROOT_PATH . 'utils/csrf.php';
+require_once ROOT_PATH . 'utils/sanitize.php';
+require_once ROOT_PATH . 'utils/flash.php';
 
 session_start();
 

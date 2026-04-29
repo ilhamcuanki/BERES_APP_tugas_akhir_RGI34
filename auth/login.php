@@ -1,8 +1,8 @@
 <?php
 // auth/login.php
 require_once __DIR__ . '/../config/constants.php';
-require_once ROOT_PATH . 'helpers/csrf.php';
-require_once ROOT_PATH . 'helpers/flash.php';
+require_once ROOT_PATH . 'utils/csrf.php';
+require_once ROOT_PATH . 'utils/flash.php';
 
 ?>
 <!DOCTYPE html>
