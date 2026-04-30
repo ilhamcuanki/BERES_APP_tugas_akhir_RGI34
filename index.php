@@ -2,6 +2,23 @@
 // index.php
 require_once __DIR__ . '/config/constants.php';
 require_once __DIR__ . '/config/database.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// 🚦 SMART ROUTER: Cek sesi aktif & redirect sesuai role
+if (isset($_SESSION['user_id'], $_SESSION['role'])) {
+    $target_dashboard = match($_SESSION['role']) {
+        'admin'  => BASE_URL . 'admin/dashboard.php',
+        'helper' => BASE_URL . 'helper/dashboard.php',
+        default  => BASE_URL . 'client/dashboard.php'
+    };
+    header("Location: $target_dashboard");
+    exit; // WAJIB: Hentikan eksekusi agar HTML landing page tidak ter-render
+}
+
+// Jika tidak ada session, lanjut render landing page di bawah ini
 ?>
 <!DOCTYPE html>
 <html lang="id">
