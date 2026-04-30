@@ -172,3 +172,20 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: v
   .progress-track::before { width: 3px; height: 100%; left: 16px; top: 0; transform: none; }
   .step { flex-direction: row; gap: 0.8rem; }
 }
+
+/* === PHASE 8: HANDSHAKE & REVIEW UI === */
+.review-section { background: #f8fafc; padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border); margin-top: 1.5rem; }
+.review-section h4 { margin-bottom: 0.75rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
+
+.rating-input { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 0.25rem; margin-bottom: 0.5rem; }
+.rating-input input { display: none; }
+.rating-input label { cursor: pointer; color: #cbd5e1; font-size: 1.6rem; transition: color 0.2s, transform 0.2s; }
+.rating-input label:hover, .rating-input label:hover ~ label, .rating-input input:checked ~ label { color: #f59e0b; transform: scale(1.1); }
+
+.review-display { margin-top: 1.5rem; padding: 1.25rem; background: #fff; border: 1px solid #e2e8f0; border-radius: var(--radius); }
+.review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+.review-header .stars { color: #f59e0b; font-size: 1.1rem; }
+.review-header .stars .filled { color: #f59e0b; }
+.review-author { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+.review-display p { color: var(--text-main); line-height: 1.6; margin: 0; }
+.btn-confirm { width: 100%; justify-content: center; }
