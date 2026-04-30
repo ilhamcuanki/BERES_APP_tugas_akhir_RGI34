@@ -3,22 +3,18 @@
 require_once __DIR__ . '/config/constants.php';
 require_once __DIR__ . '/config/database.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
-// 🚦 SMART ROUTER: Cek sesi aktif & redirect sesuai role
+// 🚦 SMART ROUTER: Auto-redirect user yang sudah login
 if (isset($_SESSION['user_id'], $_SESSION['role'])) {
-    $target_dashboard = match($_SESSION['role']) {
+    $target = match($_SESSION['role']) {
         'admin'  => BASE_URL . 'admin/dashboard.php',
         'helper' => BASE_URL . 'helper/dashboard.php',
         default  => BASE_URL . 'client/dashboard.php'
     };
-    header("Location: $target_dashboard");
-    exit; // WAJIB: Hentikan eksekusi agar HTML landing page tidak ter-render
+    header("Location: $target");
+    exit;
 }
-
-// Jika tidak ada session, lanjut render landing page di bawah ini
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -26,25 +22,27 @@ if (isset($_SESSION['user_id'], $_SESSION['role'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BERES - Solusi Jasa Lokal Terpercaya</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
-  
 </head>
 <body>
   <nav class="navbar">
     <div class="container nav-content">
-      <a href="index.php" class="logo">
+      <a href="<?= BASE_URL ?>index.php" class="logo">
         <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div> BERES
       </a>
-      <div class="nav-actions">
-        <a href="#" class="btn btn-ghost">
-          <i class="fa-regular fa-circle-question"></i> <span>Bantuan</span>
-        </a>
-        <a href="#" class="btn btn-outline"><i class="fa-regular fa-user"></i> <span>Masuk</span></a>
-        <a href="#" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> <span>Daftar</span></a>
+      
+      <!-- Hamburger Toggle -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div class="nav-menu" id="navMenu">
+        <a href="#" class="nav-link"><i class="fa-regular fa-circle-question"></i> Bantuan</a>
+        <a href="<?= BASE_URL ?>auth/login.php" class="nav-link btn-nav-outline"><i class="fa-regular fa-user"></i> Masuk</a>
+        <a href="<?= BASE_URL ?>auth/register.php" class="nav-link btn-nav-primary"><i class="fa-solid fa-user-plus"></i> Daftar</a>
       </div>
     </div>
   </nav>
@@ -56,8 +54,8 @@ if (isset($_SESSION['user_id'], $_SESSION['role'])) {
         <h1>Solusi Cepat untuk Kebutuhan Rumah Tangga</h1>
         <p>Hubungkan kebutuhan Anda dengan penyedia jasa lokal terpercaya dalam hitungan menit. Aman, transparan, dan tervalidasi oleh sistem kami.</p>
         <div class="hero-actions">
-          <a href="#" class="btn btn-primary hero-btn"><i class="fa-solid fa-magnifying-glass-location"></i> Cari Penyedia Jasa</a>
-          <a href="#" class="btn btn-outline hero-btn" style="background:var(--surface);"><i class="fa-solid fa-briefcase"></i> Tawarkan Keahlian</a>
+          <a href="<?= BASE_URL ?>auth/register.php?role=client" class="btn btn-primary hero-btn"><i class="fa-solid fa-magnifying-glass-location"></i> Cari Penyedia Jasa</a>
+          <a href="<?= BASE_URL ?>auth/register.php?role=helper" class="btn btn-outline hero-btn" style="background:var(--surface);"><i class="fa-solid fa-briefcase"></i> Tawarkan Keahlian</a>
         </div>
       </div>
     </section>
@@ -105,25 +103,20 @@ if (isset($_SESSION['user_id'], $_SESSION['role'])) {
   </footer>
 
   <script>
-    // Intersection Observer untuk animasi card saat scroll
+    // Hamburger Menu Toggle & Close on Outside Click
     document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.card');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.style.opacity = '1';
-              entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
-          }
-        });
-      }, { threshold: 0.1 });
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      
+      toggle?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('active');
+      });
 
-      cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'all 0.5s ease';
-        observer.observe(card);
+      document.addEventListener('click', (e) => {
+        if (menu && !menu.contains(e.target) && e.target !== toggle) {
+          menu.classList.remove('active');
+        }
       });
     });
   </script>
