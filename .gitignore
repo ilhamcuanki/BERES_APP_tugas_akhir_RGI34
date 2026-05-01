@@ -1,0 +1,29 @@
+# Environment & Secrets
+.env
+*.log
+*.tmp
+*.bak
+
+# OS Generated
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE/Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Uploads Content (track folder structure, ignore user files)
+assets/img/uploads/*
+!assets/img/uploads/.gitkeep
+!assets/img/uploads/.htaccess
+
+# Database Dumps (except our base schema)
+*.sql
+!database/db_beres.sql
+
+# Composer/Node (jika dipakai di masa depan)
+vendor/
+node_modules/
