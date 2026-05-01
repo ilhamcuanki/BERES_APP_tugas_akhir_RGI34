@@ -174,16 +174,24 @@ php -S localhost:8000 -t .
 
 ---
 
+## ⚙️ Keputusan Arsitektur Tambahan
+| Komponen | Keputusan | Alasan | Status |
+|----------|-----------|--------|--------|
+| `index.php` Router | Smart entry-point: redirect ke dashboard role jika session aktif | Meningkatkan UX returning user, mengurangi friksi navigasi | ✅ Fase 8 |
+| Navbar Landing | Hamburger dropdown interaktif (vanilla JS) | Fokus konversi, UI bersih, konsisten dengan pola mobile-first | ✅ Fase 8 |
+| Hero CTA Routing | Link langsung ke `register.php?role=client|helper` | Onboarding lebih cepat, pre-fill context untuk user baru | ✅ Fase 8 |
+| Admin Panel | Admin Lite di Fase 10: CRUD kategori, suspend user, log gig selesai | Membutuhkan data inti yang stabil; scope minimalis untuk workshop | 📅 Fase 10 |
+| Beres-Wallet | Simulasi UI via `SUM(budget)` dari tugas `done`. Ledger asli ditunda | Menghindari kompleksitas transaksi atomic & risiko bug kritis di MVP | 📅 Post-Workshop |
+| Path Handling | `BASE_URL` untuk browser, `ROOT_PATH` untuk server | Mencegah error redirect & include, memisahkan konteks eksekusi | ✅ Konsisten sejak Fase 3 |
+| CSS Strategy | Append-only ke `style.css`, hapus inline style bertahap | Maintainability, konsistensi visual, mengurangi duplikasi | ✅ Fase 3-9 |
+
+---
+
 ## 📝 Catatan Kelanjutan (Untuk AI/Mentor Baru)
-- Proyek berada di **Fase 1: Inisialisasi & Setup Lingkungan**.
+- Proyek berada di **Fase 9: Profil & Portfolio** (mendekati selesai).
 - Stack: PHP Prosedural, PDO, MySQL, HTML/CSS/JS vanilla, Git.
 - Pola utama: PRG, Atomic UPDATE, State Machine, Flash Session, Dynamic Trust Score.
-- Jika melanjutkan, mulai dari:
-  1. Setup `config/database.php` (PDO)
-  2. Buat `helpers/csrf.php` & `includes/auth_check.php`
-  3. Implementasi `register_process.php` & `login_process.php`
-- Gunakan checklist keamanan di atas sebagai patokan review kode.
-- Dokumentasi lengkap fitur, struktur, DB, dan roadmap sudah tertanam di file ini.
+- Struktur folder final:
 
 ---
 *© 2026 BERES Project. Dibangun untuk Workshop Pembelajaran PHP/MySQL.*
