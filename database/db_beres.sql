@@ -64,3 +64,8 @@ INSERT INTO `users` (`nama`, `email`, `password`, `role`) VALUES
 -- Data Awal: Kategori Jasa
 INSERT INTO `categories` (`nama_kategori`) VALUES 
 ('Pertukangan'), ('Kebersihan'), ('Elektrikal'), ('Pindahan & Angkut'), ('Asisten Rumah Tangga');
+
+ALTER TABLE `users` 
+ADD COLUMN `bio` TEXT DEFAULT NULL AFTER `role`,
+ADD COLUMN `keahlian` VARCHAR(150) DEFAULT NULL AFTER `bio`,
+ADD COLUMN IF NOT EXISTS `foto_profil` VARCHAR(255) DEFAULT 'default-avatar.png' AFTER `role`;
